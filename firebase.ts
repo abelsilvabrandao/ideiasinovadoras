@@ -1,6 +1,6 @@
 
-// Fix: Use named export initializeApp from 'firebase/app' for Modular SDK compatibility
-import { initializeApp } from "firebase/app";
+// Fix: Use namespace import for firebase/app to avoid "no exported member" errors in certain TypeScript/build configurations
+import * as firebase from "firebase/app";
 import { 
   getFirestore, 
   collection, 
@@ -32,8 +32,8 @@ const firebaseConfig = {
   measurementId: "G-H0JRD5QQRH"
 };
 
-// Fix: Call initializeApp directly as a named export
-const app = initializeApp(firebaseConfig);
+// Fix: Access initializeApp from the firebase namespace
+const app = firebase.initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
 // Nomes das coleções no Firestore

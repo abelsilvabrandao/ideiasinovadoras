@@ -1,9 +1,9 @@
+
 import React, { useState, useEffect } from 'react';
 import { 
-  LayoutDashboard, Lightbulb, ClipboardCheck, Trophy, Settings, LogOut, User, Search, Droplets, Menu, Vote, X
+  LayoutDashboard, Lightbulb, ClipboardCheck, Trophy, Settings, LogOut, User, Search, Droplets, Menu, Vote, X, FlaskConical
 } from 'lucide-react';
 import { UserRole } from '../types';
-import { Logo } from './Logo';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -30,6 +30,7 @@ export const Layout: React.FC<LayoutProps> = ({
 }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
+  const [imgError, setImgError] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -83,7 +84,16 @@ export const Layout: React.FC<LayoutProps> = ({
         <div className="p-6 flex items-center justify-between">
           <div className="flex items-center gap-3 overflow-hidden">
             <div className="bg-emerald-600 p-1.5 rounded-xl shadow-xl shadow-emerald-500/20 animate-bounce shrink-0">
-              <Logo size={28} className="text-white" />
+              {!imgError ? (
+                <img 
+                  src="/IconeLAB.png" 
+                  alt="Logo" 
+                  className="w-7 h-7 object-contain"
+                  onError={() => setImgError(true)}
+                />
+              ) : (
+                <FlaskConical className="text-white w-5 h-5" />
+              )}
             </div>
             {isSidebarOpen && (
               <span className="text-white font-black text-lg tracking-tight truncate animate-in fade-in slide-in-from-left-2 duration-300">

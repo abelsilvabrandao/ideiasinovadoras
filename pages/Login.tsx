@@ -1,8 +1,8 @@
+
 import React, { useState } from 'react';
-import { Lock, User, ShieldCheck, ArrowRight, Loader2, CheckCircle, KeyRound } from 'lucide-react';
+import { Lock, User, ShieldCheck, ArrowRight, Loader2, CheckCircle, KeyRound, FlaskConical } from 'lucide-react';
 import { UserRole, UserAccount } from '../types';
 import { db, COLECOES, doc, getDoc, updateDoc } from '../firebase';
-import { Logo } from '../components/Logo';
 
 interface LoginProps {
   onLogin: (user: UserAccount) => void;
@@ -13,6 +13,7 @@ export const Login: React.FC<LoginProps> = ({ onLogin }) => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [imgError, setImgError] = useState(false);
 
   const [needsNewPassword, setNeedsNewPassword] = useState(false);
   const [tempUser, setTempUser] = useState<UserAccount | null>(null);
@@ -123,7 +124,16 @@ export const Login: React.FC<LoginProps> = ({ onLogin }) => {
       <div className="max-w-md w-full space-y-6 sm:space-y-8 relative z-10">
         <div className="text-center space-y-3 sm:space-y-4">
           <div className="inline-flex p-4 sm:p-5 bg-emerald-600 rounded-[24px] sm:rounded-[32px] shadow-2xl shadow-emerald-500/40 animate-bounce">
-            <Logo size={48} className="text-white" />
+            {!imgError ? (
+              <img 
+                src="/IconeLAB.png" 
+                alt="InterLab Logo" 
+                className="w-10 h-10 sm:w-14 sm:h-14 object-contain"
+                onError={() => setImgError(true)}
+              />
+            ) : (
+              <FlaskConical className="w-8 h-8 sm:w-12 sm:h-12 text-white" />
+            )}
           </div>
           <div className="space-y-1">
             <h1 className="text-4xl sm:text-5xl font-black text-white tracking-tighter uppercase">InterLab</h1>
