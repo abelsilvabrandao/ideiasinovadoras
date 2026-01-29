@@ -1,0 +1,7 @@
+{
+  "name": "InterLab - Portal de Inovação",
+  "description": "Sistema completo InterLab para gestão do Programa de Ideias Inovadoras e Sangue Verde, abrangendo submissão, avaliação ponderada, ranking trimestral e acompanhamento de implantação.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
