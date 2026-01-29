@@ -123,12 +123,12 @@ export const Login: React.FC<LoginProps> = ({ onLogin }) => {
 
       <div className="max-w-md w-full space-y-6 sm:space-y-8 relative z-10">
         <div className="text-center space-y-3 sm:space-y-4">
-          <div className="inline-flex p-4 sm:p-5 bg-emerald-600 rounded-[24px] sm:rounded-[32px] shadow-2xl shadow-emerald-500/40 animate-bounce">
+          <div className="inline-flex p-3 sm:p-4 bg-emerald-600 rounded-[30px] sm:rounded-[40px] shadow-2xl shadow-emerald-500/40 animate-bounce">
             {!imgError ? (
               <img 
-                src="/IconeLAB.png" 
+                src="/iconelab.png" 
                 alt="InterLab Logo" 
-                className="w-10 h-10 sm:w-14 sm:h-14 object-contain"
+                className="w-16 h-16 sm:w-20 sm:h-20 object-contain"
                 onError={() => setImgError(true)}
               />
             ) : (
