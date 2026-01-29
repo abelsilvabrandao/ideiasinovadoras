@@ -1,5 +1,6 @@
 
-import { initializeApp } from "firebase/app";
+// Fix: Use namespace import for firebase/app to avoid "no exported member" errors in certain TypeScript/build configurations
+import * as firebase from "firebase/app";
 import { 
   getFirestore, 
   collection, 
@@ -17,32 +18,44 @@ import {
   arrayUnion
 } from "firebase/firestore";
 
-// No Vite, usamos import.meta.env. 
-// Adicionamos um fallback vazio para evitar o erro "Cannot read properties of undefined"
-const env = (import.meta as any).env || {};
-
+/**
+ * CONFIGURAÇÃO GLOBAL DO FIREBASE
+ * Credenciais inseridas diretamente para funcionamento imediato.
+ */
 const firebaseConfig = {
-  apiKey: env.FIREBASE_API_KEY,
-  authDomain: env.FIREBASE_AUTH_DOMAIN,
-  projectId: env.FIREBASE_PROJECT_ID,
-  storageBucket: env.FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: env.FIREBASE_MESSAGING_SENDER_ID,
-  appId: env.FIREBASE_APP_ID,
-  measurementId: env.FIREBASE_MEASUREMENT_ID
+  apiKey: "AIzaSyBDysRdOX4Urcw76POWmjDjNT3-X5cUfJA",
+  authDomain: "ideiasinovadoras-cccaf.firebaseapp.com",
+  projectId: "ideiasinovadoras-cccaf",
+  storageBucket: "ideiasinovadoras-cccaf.firebasestorage.app",
+  messagingSenderId: "96078087612",
+  appId: "1:96078087612:web:4d992b06a867a4891957b9",
+  measurementId: "G-H0JRD5QQRH"
 };
 
-// Log de aviso caso as variáveis não estejam configuradas (apenas em dev)
-if (!firebaseConfig.apiKey && env.MODE !== 'production') {
-  console.warn("Firebase: Chaves de API não encontradas. Certifique-se de configurar as variáveis de ambiente no Vercel ou no arquivo .env");
-}
-
-const app = initializeApp(firebaseConfig);
+// Fix: Access initializeApp from the firebase namespace
+const app = firebase.initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
+// Nomes das coleções no Firestore
 export const COLECOES = {
   IDEIAS: "ideias",
   CICLOS: "configuracoes_ciclo",
   COLABORADORES: "colaboradores"
 };
 
-export { collection, addDoc, updateDoc, doc, onSnapshot, query, orderBy, setDoc, getDoc, deleteDoc, getDocs, where, arrayUnion };
+// Exporta funções do Firestore para uso em todo o app
+export { 
+  collection, 
+  addDoc, 
+  updateDoc, 
+  doc, 
+  onSnapshot, 
+  query, 
+  orderBy, 
+  setDoc, 
+  getDoc, 
+  deleteDoc, 
+  getDocs, 
+  where, 
+  arrayUnion 
+};
